@@ -1,4 +1,4 @@
-package com.github.m0bilebtw;
+package com.github.sophronize;
 
 import net.runelite.client.config.Config;
 import net.runelite.client.config.ConfigGroup;
@@ -6,182 +6,226 @@ import net.runelite.client.config.ConfigItem;
 import net.runelite.client.config.ConfigSection;
 import net.runelite.client.config.Range;
 
-@ConfigGroup(CEngineerCompletedConfig.GROUP)
-public interface CEngineerCompletedConfig extends Config {
-    String GROUP = "cengineercompleted";
+@ConfigGroup(PokeRuneConfig.GROUP)
+public interface PokeRuneConfig extends Config
+{
+    String GROUP = "pokerune";
+
+    enum PokemonGeneration
+    {
+        GEN_1("Red/Blue/Yellow"),
+        GEN_2("Gold/Silver/Crystal"),
+        GEN_3("Ruby/Sapphire/Emerald"),
+        GEN_4("Diamond/Pearl/Platinum"),
+        GEN_5("Black/White/Black 2/White 2"),
+        GEN_6("X/Y/ORAS"),
+        GEN_7("Sun/Moon/Ultra Sun/Ultra Moon"),
+        GEN_8("Sword/Shield"),
+        GEN_9("Scarlet/Violet");
+
+        private final String label;
+
+        PokemonGeneration(String label)
+        {
+            this.label = label;
+        }
+
+        @Override
+        public String toString()
+        {
+            return label;
+        }
+    }
+
+    @ConfigItem(
+        keyName = "pokemonGeneration",
+        name = "Pokémon Generation",
+        description = "Select which generation's sounds to use",
+        position = 0
+    )
+    default PokemonGeneration pokemonGeneration()
+    {
+        return PokemonGeneration.GEN_1;
+    }
 
     @ConfigSection(
-            name = "Announce Achievements",
-            description = "Which sounds that are achievements should play.",
-            position = 0
+        name = "Announce Achievements",
+        description = "Which sounds that are achievements should play.",
+        position = 10
     )
     String SECTION_ACHIEVEMENT_ANNOUNCEMENTS = "Announce Achievements";
 
     @ConfigItem(
-            keyName = "announceLevelUp",
-            name = "Level ups",
-            description = "Should C Engineer announce when you gain a level in a skill?",
-            section = SECTION_ACHIEVEMENT_ANNOUNCEMENTS,
-            position = 1
+        keyName = "announceLevelUp",
+        name = "Level ups",
+        description = "Should PokeRune announce when you gain a level in a skill?",
+        section = SECTION_ACHIEVEMENT_ANNOUNCEMENTS,
+        position = 11
     )
-    default boolean announceLevelUp() {
+    default boolean announceLevelUp()
+    {
         return true;
     }
 
     @ConfigItem(
-            keyName = "announceLevelUpIncludesVirtual",
-            name = "Include virtual level ups",
-            description = "Should C Engineer announce when you gain a virtual (>99) level in a skill?",
-            section = SECTION_ACHIEVEMENT_ANNOUNCEMENTS,
-            position = 2
+        keyName = "announceLevelUpIncludesVirtual",
+        name = "Include virtual level ups",
+        description = "Should PokeRune announce when you gain a virtual (>99) level in a skill?",
+        section = SECTION_ACHIEVEMENT_ANNOUNCEMENTS,
+        position = 12
     )
-    default boolean announceLevelUpIncludesVirtual() {
+    default boolean announceLevelUpIncludesVirtual()
+    {
         return false;
     }
 
     @ConfigItem(
-            keyName = "announceQuestCompletion",
-            name = "Quest completions",
-            description = "Should C Engineer announce when you complete a quest?",
-            section = SECTION_ACHIEVEMENT_ANNOUNCEMENTS,
-            position = 3
+        keyName = "announceQuestCompletion",
+        name = "Quest completions",
+        description = "Should PokeRune announce when you complete a quest?",
+        section = SECTION_ACHIEVEMENT_ANNOUNCEMENTS,
+        position = 13
     )
-    default boolean announceQuestCompletion() {
+    default boolean announceQuestCompletion()
+    {
         return true;
     }
 
     @ConfigItem(
-            keyName = "announceCollectionLog",
-            name = "New collection log entry",
-            description = "Should C Engineer announce when you fill in a new slot in your collection log? This one relies on you having chat messages (included with the popup option) enabled in game settings!",
-            section = SECTION_ACHIEVEMENT_ANNOUNCEMENTS,
-            position = 4
+        keyName = "announceCollectionLog",
+        name = "New collection log entry",
+        description = "Should PokeRune announce when you fill in a new slot in your collection log? This relies on having chat messages enabled in-game settings!",
+        section = SECTION_ACHIEVEMENT_ANNOUNCEMENTS,
+        position = 14
     )
-    default boolean announceCollectionLog() {
+    default boolean announceCollectionLog()
+    {
         return true;
     }
 
     @ConfigItem(
-            keyName = "announceAchievementDiary",
-            name = "Completed achievement diaries",
-            description = "Should C Engineer announce when you complete a new achievement diary?",
-            section = SECTION_ACHIEVEMENT_ANNOUNCEMENTS,
-            position = 5
+        keyName = "announceAchievementDiary",
+        name = "Completed achievement diaries",
+        description = "Should PokeRune announce when you complete a new achievement diary?",
+        section = SECTION_ACHIEVEMENT_ANNOUNCEMENTS,
+        position = 15
     )
-    default boolean announceAchievementDiary() {
+    default boolean announceAchievementDiary()
+    {
         return true;
     }
 
     @ConfigItem(
-            keyName = "announceCombatAchievement",
-            name = "Completed combat achievement tasks",
-            description = "Should C Engineer announce when you complete a new combat achievement task?",
-            section = SECTION_ACHIEVEMENT_ANNOUNCEMENTS,
-            position = 6
+        keyName = "announceCombatAchievement",
+        name = "Completed combat achievement tasks",
+        description = "Should PokeRune announce when you complete a new combat achievement task?",
+        section = SECTION_ACHIEVEMENT_ANNOUNCEMENTS,
+        position = 16
     )
-    default boolean announceCombatAchievement() {
+    default boolean announceCombatAchievement()
+    {
+        return true;
+    }
+
+    @ConfigItem(
+        keyName = "announceSlayerTasks",
+        name = "Completed Slayer Tasks",
+        description = "Should PokeRune announce when you complete a slayer task?",
+        section = SECTION_ACHIEVEMENT_ANNOUNCEMENTS,
+        position = 17
+    )
+    default boolean announceSlayerTasks()
+    {
+        return true;
+    }
+
+    @ConfigItem(
+        keyName = "announceFarmingContracts",
+        name = "Completed Farming Contracts",
+        description = "Should PokeRune announce when you complete a farming contract?",
+        section = SECTION_ACHIEVEMENT_ANNOUNCEMENTS,
+        position = 18
+    )
+    default boolean announceFarmingContracts()
+    {
+        return true;
+    }
+
+    @ConfigItem(
+        keyName = "announceHunterRumours",
+        name = "Completed Hunter Rumours",
+        description = "Should PokeRune announce when you receive the required creature part for a hunter rumour?",
+        section = SECTION_ACHIEVEMENT_ANNOUNCEMENTS,
+        position = 19
+    )
+    default boolean announceHunterRumours()
+    {
+        return true;
+    }
+
+    @ConfigItem(
+        keyName = "announceLeaguesTasks",
+        name = "Completed Leagues Tasks",
+        description = "Should PokeRune announce when you complete a leagues task?",
+        section = SECTION_ACHIEVEMENT_ANNOUNCEMENTS,
+        position = 20
+    )
+    default boolean announceLeaguesTasks()
+    {
+        return true;
+    }
+
+    @ConfigItem(
+        keyName = "needToRemindAboutDisablingLeaguesTasks",
+        name = "Need to remind user they can disable leagues tasks announcements if they want",
+        description = "Leagues tasks can get spammy, and some users might not know they can toggle individual announcements instead of the whole plugin",
+        section = SECTION_ACHIEVEMENT_ANNOUNCEMENTS,
+        hidden = true
+    )
+    default boolean needToRemindAboutDisablingLeaguesTasks()
+    {
         return true;
     }
 
     @ConfigSection(
-            name = "Announce Other",
-            description = "Which sounds that are not necessarily achievements (and not easter eggs) should play.",
-            position = 20
+        name = "Announce Other",
+        description = "Which sounds that are not necessarily achievements (and not easter eggs) should play.",
+        position = 30
     )
     String SECTION_NON_ACHIEVEMENT_ANNOUNCEMENTS = "Announce Other";
 
     @ConfigItem(
-            keyName = "announceDeath",
-            name = "When you die",
-            description = "Should C Engineer relive his PvP HCIM death when you die?",
-            section = SECTION_NON_ACHIEVEMENT_ANNOUNCEMENTS,
-            position = 21
+        keyName = "announceDeath",
+        name = "When you die",
+        description = "Should PokeRune play a sound when you die?",
+        section = SECTION_NON_ACHIEVEMENT_ANNOUNCEMENTS,
+        position = 31
     )
-    default boolean announceDeath() {
-        return true;
-    }
-
-    @ConfigItem(
-            keyName = "announceNonTrouverInfernal",
-            name = "Non-locked infernal in wildy (once per plugin session)",
-            description = "Should C Engineer warn you when you enter the wilderness (only once per plugin session) with an infernal cape that has not been locked with a trouver parchment?",
-            section = SECTION_NON_ACHIEVEMENT_ANNOUNCEMENTS,
-            position = 22
-    )
-    default boolean announceNonTrouverInfernal() {
+    default boolean announceDeath()
+    {
         return true;
     }
 
     @ConfigSection(
-            name = "General Announcement Settings",
-            description = "Settings for other details when achievement sounds play.",
-            position = 40
+        name = "General Announcement Settings",
+        description = "Settings for other details when achievement sounds play.",
+        position = 40
     )
     String SECTION_GENERAL_ANNOUNCEMENT_SETTINGS = "General Announcement Settings";
 
-    @ConfigItem(
-            keyName = "showChatMessages",
-            name = "Show fake public chat message (only you will see it)",
-            description = "Should C Engineer announce your achievements in game chat as well as audibly?",
-            section = SECTION_GENERAL_ANNOUNCEMENT_SETTINGS,
-            position = 41
-    )
-    default boolean showChatMessages() {
-        return true;
-    }
-
     @Range(
-            min = 0,
-            max = 200
+        min = 0,
+        max = 200
     )
     @ConfigItem(
-            keyName = "announcementVolume",
-            name = "Announcement volume",
-            description = "Adjust how loud the audio announcements are played!",
-            section = SECTION_GENERAL_ANNOUNCEMENT_SETTINGS,
-            position = 42
+        keyName = "announcementVolume",
+        name = "Announcement volume",
+        description = "Adjust how loud the audio announcements are played!",
+        section = SECTION_GENERAL_ANNOUNCEMENT_SETTINGS,
+        position = 41
     )
-    default int announcementVolume() {
+    default int announcementVolume()
+    {
         return 100;
-    }
-
-    @ConfigSection(
-            name = "Easter Eggs and Streamer Trolls",
-            description = "Settings for non-achievement sounds.",
-            position = 60
-    )
-    String SECTION_EASTER_EGGS_AND_STREAMERS = "Easter Eggs and Streamer Trolls";
-
-    @ConfigItem(
-            keyName = "easterEggs",
-            name = "Easter eggs",
-            description = "Should C Engineer comment on your gameplay? And maybe do a little trolling?",
-            section = SECTION_EASTER_EGGS_AND_STREAMERS,
-            position = 61
-    )
-    default boolean easterEggs() {
-        return true;
-    }
-
-    @ConfigItem(
-            keyName = "downloadStreamerSounds",
-            name = "Include streamer troll sounds (requires plugin restart)",
-            description = "Restart plugin to take effect! If disabled, will remove and no longer download sounds that are streamer trolls",
-            section = SECTION_EASTER_EGGS_AND_STREAMERS,
-            position = 62
-    )
-    default boolean downloadStreamerTrolls() {
-        return true;
-    }
-
-    @ConfigItem(
-            keyName = "muteSnowballsIfCEngineerIsNear",
-            name = "Stealthy snowballs when C Engineer is nearby",
-            description = "Mute snowball sound effects if C Engineer is nearby to allow for stealthier trolling",
-            section = SECTION_EASTER_EGGS_AND_STREAMERS,
-            position = 63
-    )
-    default boolean muteSnowballsIfCEngineerIsNear() {
-        return true;
     }
 }
